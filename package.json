@@ -1,0 +1,19 @@
+{
+  "name": "pagedestroyer",
+  "version": "0.1.0",
+  "description": "A collaborative page descruction game",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/.bin/browserify ./game.js -o ./public/bundle.js",
+    "build-debug": "./node_modules/.bin/browserify --debug ./game.js -o ./public/bundle.js"
+  },
+  "author": "Joe Pfeiffer",
+  "license": "ISC",
+  "dependencies": {
+    "browserify": "^13.1.0",
+    "dibus": "^0.1.1",
+    "express": "^4.14.0",
+    "socket.io": "^1.4.8"
+  }
+}
