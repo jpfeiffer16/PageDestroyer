@@ -60,10 +60,10 @@ module.exports = {
 
     var collides = function(coordsObj) {
       return collisionElements.filter(function (element) {
-        return (element.x < coordsObj.x) &&
-          ((element.x + element.offsetWidth) > (coordsObj.x)) &&
-          (element.y < coordsObj.y) &&
-          ((element.y + element.offsetHeight) > (coordsObj.y));
+        return (element.offsetLeft < coordsObj.x) &&
+          ((element.offsetLeft + element.offsetWidth) > (coordsObj.x)) &&
+          (element.offsetTop < coordsObj.y) &&
+          ((element.offsetTop + element.offsetHeight) > (coordsObj.y));
       }).length > 0;
     };
 

@@ -51,9 +51,9 @@ module.exports = {
     var loop = function() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       if (player != null) {
-        if (PageManager.collides({
-          x: player.x,
-          y: player.y + player.height
+        if (!PageManager.collides({
+          x: player.pos.x,
+          y: player.pos.y + player.height
         })) {
           player.pos.y++;
         }
