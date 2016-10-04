@@ -60,7 +60,7 @@ module.exports = {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       if (player.ready) {
         //Various simulations
-        var newPos = player.vel.cp();
+        var newPos = player.pos.cp();
 
         //Gravity
         newPos.add(new Vector(0, .96));
@@ -75,15 +75,6 @@ module.exports = {
 
         // if (player.vel.y > 0) player.vel.sub(new Vector(0, .3));
         // if (player.vel.y < 0) player.vel.add(new Vector(0, .3));
-
-        
-    
-          
-        
-
-        
-
-
 
         if (!PageManager.collides({
           x: newPos.x,
