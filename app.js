@@ -5,6 +5,7 @@ const browserify = require('browserify');
 app.use(express.static('public'));
 app.get('/bundle.js', (req, res) => {
   browserify({
+    // debug: process.env.NODE_ENV == 'development'
     debug: true
   })
     .add('./game.js')
@@ -12,7 +13,7 @@ app.get('/bundle.js', (req, res) => {
     .pipe(res);
 });
 
-let port = 3000 | process.env.PORT;
+let port = 3000 || process.env.PORT;
 app.listen(port, function () {
   console.log(`Server listening on port ${ port }`);
 });

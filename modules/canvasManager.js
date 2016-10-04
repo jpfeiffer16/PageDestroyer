@@ -1,10 +1,25 @@
+var Vector = require('../types/vector');
 module.exports = {
   name: 'CanvasManager',
   service: function(PageManager) {
     var self = this;
     var canvas = null;
     var ctx = null;
-    var player = null;
+    var player = {
+      ready: false,
+      moveLeft: function() {
+        if (this.ready)
+          this.vel.x--;
+      },
+      moveRight: function() {
+        if (this.ready)
+          this.vel.x++;
+      },
+      jump: function() {
+        if (this.ready) 
+          this.vel.sub(new Vector(0, 5));
+      }
+    };
     
     var init = function() {
       canvas = document.createElement('canvas');
@@ -31,32 +46,55 @@ module.exports = {
       requestAnimationFrame(loop);
     };
 
-    var movePlayerLeft = function() {
-      console.log('Moving left');
-    };
-
-    var movePlayerRight = function() {
-      console.log('Moving right');
-    };
-
     var addPlayer = function(coordsObj) {
-      player = {
-        width: 10,
-        height: 20,
-        pos: coordsObj
-      };
+      player.ready = true;
+      player.width = 10;
+      player.height = 20;
+      player.pos = new Vector(coordsObj.x, coordsObj.y);
+      player.vel = new Vector(0, 0);
+      player.dir = new Vector(0, 1);
     };
 
     //Render stuff and do physics here
     var loop = function() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      if (player != null) {
+      if (player.ready) {
+        //Various simulations
+        var newPos = player.vel.cp();
+
+        //Gravity
+        newPos.add(new Vector(0, .96));
+
+        //Air resistance
+        // if (!(player.vel.y < 1 || player.vel.y > -1)) {
+        //   if (player.vel.x > 0) player.vel.sub(new Vector(.3, 0));
+        //   if (player.vel.x < 0) player.vel.add(new Vector(.3, 0));
+        // } else {
+        //   player.vel.x = 0;
+        // }
+
+        // if (player.vel.y > 0) player.vel.sub(new Vector(0, .3));
+        // if (player.vel.y < 0) player.vel.add(new Vector(0, .3));
+
+        
+    
+          
+        
+
+        
+
+
+
         if (!PageManager.collides({
-          x: player.pos.x,
-          y: player.pos.y + player.height
+          x: newPos.x,
+          y: newPos.y + player.height
         })) {
-          player.pos.y++;
+          // player.pos.
+          //Add the velocity to the player
+          player.pos = newPos;
         }
+        
+
         //Render the player here
         ctx.fillStyle="#FF0000";
         ctx.fillRect(player.pos.x, player.pos.y, player.width, player.height);
@@ -70,8 +108,7 @@ module.exports = {
     
 
     return {
-      movePlayerLeft: movePlayerLeft,
-      movePlayerRight: movePlayerRight
+      player: player
     };
   }
 };
