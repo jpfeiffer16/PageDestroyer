@@ -27,10 +27,15 @@ module.exports = {
       canvas.style['top'] = '0px';
       canvas.style['left'] = '0px';
       canvas.style['z-index'] = '10000';
-      canvas.style['width'] = '100%';
-      canvas.style['height'] = '100%';
-      canvas.width = screen.width;
-      canvas.height = screen.height;
+      var w = document.documentElement.clientWidth,
+        h = document.documentElement.clientHeight;
+      canvas.setAttribute('width', w);
+      canvas.setAttribute('height', h);;
+
+      canvas.style['width'] = w + 'px';
+      canvas.style['height'] = h + 'px';
+      // canvas.width = screen.width;
+      // canvas.height = screen.height;
 
       document.body.appendChild(canvas);
       ctx = canvas.getContext('2d');
