@@ -2,6 +2,7 @@
 
 var dibus = require('dibus');
 
-dibus.register(require('./modules/pageManager'));
-dibus.register(require('./modules/canvasManager'));
-dibus.register(require('./modules/controlManger'));
+dibus.register(require('./clientModules/websocketsManager'));
+dibus.register(require('./clientModules/pageManager'));
+dibus.register(require('./clientModules/canvasManager'));
+dibus.register(require('./clientModules/controlManger'));
