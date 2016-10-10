@@ -1,20 +1,30 @@
 module.exports = (function () {
   let self = this;
   
-  let players = [];
+  // let players = [];
+  let pages = [];
   let bullets = [];
 
-  let playerMove = function(data) {
-    let {playerId, info} = data;
-  }
+  let addPlayer = function(data) {
+    let {url, player} = data;
+    pages[url][player.id] = player;
+  };
 
-  let playerShoot = function(data) {
-    let {playerId, info} = data;
-  }
+  let playerChange = function(data) {
+    let {url, player} = data;
+    pages[url][player.id] = player;
+    console.dir(pages);
+  };
+
+  let addBullet = function(data) {
+    let {url, bullet} = data;
+    //TODO: Add bullet here
+  };
 
   //Exports
   return {
-    playerMove,
-    playerShoot
+    addPlayer,
+    playerChange,
+    addBullet
   }
 })();

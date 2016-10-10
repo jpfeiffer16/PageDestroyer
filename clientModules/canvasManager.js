@@ -1,34 +1,46 @@
 var Vector = require('../types/vector');
+var uuid = require('uuid');
 module.exports = {
   name: 'CanvasManager',
-  service: function(PageManager) {
+  service: function(PageManager, WebsocketsManager) {
     var self = this;
     var canvas = null;
     var ctx = null;
     var mousePos = new Vector(0, 0);
     var aimAngle = 0;
     var bullets = [];
+    var otherPlayers = [];
 
     var w = document.documentElement.clientWidth,
         h = document.documentElement.clientHeight;
     var player = {
+      id: uuid.v4(),
       ready: false,
       moveLeft: function() {
-        if (this.ready)
+        if (this.ready) {
           this.vel.x--;
+          WebsocketsManager.playerChange(this);
+        }
+          
       },
       moveRight: function() {
-        if (this.ready)
+        if (this.ready) {
           this.vel.x++;
+          WebsocketsManager.playerChange(this);
+        }
+
       },
       jump: function() {
-        if (this.ready && !this.hasJumped) 
+        if (this.ready && !this.hasJumped) {
           this.vel.sub(new Vector(0, 10));
           this.hasJumped = true;
           var self = this;
           setTimeout(function() {
             self.hasJumped = false;
           }, 900);
+          WebsocketsManager.playerChange(this);
+        }
+
       },
       shoot: function () {
         if (this.ready) {
@@ -238,8 +250,11 @@ module.exports = {
 
     init();
 
+    // loop();
+
     return {
-      player: player
+      player: player,
+      otherPlayers: otherPlayers
     };
   }
 };
