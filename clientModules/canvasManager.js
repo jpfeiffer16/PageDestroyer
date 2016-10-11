@@ -2,7 +2,7 @@ var Vector = require('../types/vector');
 var uuid = require('uuid');
 module.exports = {
   name: 'CanvasManager',
-  service: function(PageManager, WebsocketsManager) {
+  service: function(PageManager, ActionManager) {
     var self = this;
     var canvas = null;
     var ctx = null;
@@ -19,14 +19,14 @@ module.exports = {
       moveLeft: function() {
         if (this.ready) {
           this.vel.x--;
-          WebsocketsManager.playerChange(this);
+          ActionManager.playerChange(this);
         }
           
       },
       moveRight: function() {
         if (this.ready) {
           this.vel.x++;
-          WebsocketsManager.playerChange(this);
+          ActionManager.playerChange(this);
         }
 
       },
@@ -38,7 +38,7 @@ module.exports = {
           setTimeout(function() {
             self.hasJumped = false;
           }, 900);
-          WebsocketsManager.playerChange(this);
+          ActionManager.playerChange(this);
         }
 
       },
@@ -128,6 +128,15 @@ module.exports = {
       player.pos = new Vector(coordsObj.x, coordsObj.y);
       player.vel = new Vector(0, 0);
       player.dir = new Vector(0, 1);
+    };
+
+    var playerChange = function(player) {
+      otherPlayers.filter(function(player) {
+        return player.id == player.id;
+      })
+      .forEach(function(player) {
+        player = player;
+      });
     };
 
     //Render stuff and do physics here
@@ -254,7 +263,8 @@ module.exports = {
 
     return {
       player: player,
-      otherPlayers: otherPlayers
+      otherPlayers: otherPlayers,
+      playerChange: playerChange
     };
   }
 };

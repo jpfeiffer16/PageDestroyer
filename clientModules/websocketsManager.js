@@ -1,6 +1,6 @@
 module.exports = {
   name: 'WebsocketsManager',
-  service: function(CanvasManager) {
+  service: function(ActionManager) {
     console.log('WebsocketsManager ready!');
     //NOTE: Abstract other stuff like this into its own module if it becomes big
     var currentScriptSrc = document.currentScript.baseURI;
@@ -17,7 +17,7 @@ module.exports = {
     socket.on('playerChange', function(player) {
       if (player.id != CanvasManager.player.id)
         return;
-      CanvasManager.otherPlayers[player.id] = player;
+      ActionManager.playerChange(player);
     });
 
     function sendEvent(eventName, data) {
