@@ -119,6 +119,11 @@ module.exports = {
       //   console.log('Mouse Down');
       //   clearInterval(shootInterval);
       // });
+
+      //Listen for our update events
+      ActionManager.on('localPlayerChange', function(player) {
+        
+      });
     };
 
     var addPlayer = function(coordsObj) {
