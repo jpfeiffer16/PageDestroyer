@@ -12,6 +12,9 @@ module.exports = {
         case 'w':
           CanvasManager.player.jump();
           break;
+        case ' ':
+          CanvasManager.player.shoot();
+          break;
       };
     });
   }

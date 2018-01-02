@@ -108,9 +108,9 @@ module.exports = {
 
         //Shoot here
         // console.log(e);
-        if (e.key == ' ') {
-          player.shoot();
-        }
+        // if (e.key == ' ') {
+        //   player.shoot();
+        // }
         // shootInterval = setInterval(player.shoot, 300);
       });
 
@@ -121,9 +121,9 @@ module.exports = {
       // });
 
       //Listen for our update events
-      ActionManager.on('localPlayerChange', function(player) {
+      // ActionManager.on('localPlayerChange', function(player) {
         
-      });
+      // });
     };
 
     var addPlayer = function(coordsObj) {

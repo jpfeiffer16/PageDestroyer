@@ -36,7 +36,8 @@ module.exports = {
     }
 
     return {
-      registerPlayer: registerPlayer
+      registerPlayer: registerPlayer,
+      playerChange: playerChange
     }
 
   }
